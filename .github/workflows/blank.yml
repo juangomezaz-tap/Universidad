@@ -1,0 +1,28 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://jpetstore.aspectran.com/');
+  await page.getByRole('link', { name: 'Sign In' }).click();
+  await page.getByRole('button', { name: 'Login' }).click();
+  await page.locator('#SidebarContent').getByRole('link', { name: 'Fish' }).click();
+  await page.getByRole('link', { name: 'FI-SW-01' }).click();
+  await page.getByRole('link', { name: 'Add to Cart' }).first().click();
+  await page.getByRole('link', { name: 'Proceed to Checkout' }).click();
+  await page.locator('input[name="billZip"]').click();
+  await page.locator('input[name="billZip"]').fill('342342');
+  await page.getByRole('button', { name: 'Continue' }).click();
+  await page.getByRole('button', { name: 'Confirm' }).click();
+  await page.getByText('Thank you, your order has').click();
+  await page.getByTitle('My Account').click();
+  await page.getByRole('link', { name: 'My Account' }).click();
+  await page.locator('input[name="firstName"]').click();
+  await page.locator('input[name="firstName"]').fill('');
+  await page.locator('input[name="firstName"]').press('CapsLock');
+  await page.locator('input[name="firstName"]').fill('J');
+  await page.locator('input[name="firstName"]').press('CapsLock');
+  await page.locator('input[name="firstName"]').fill('Juan Diego');
+  await page.locator('input[name="lastName"]').click();
+  await page.locator('input[name="lastName"]').fill('Gomez Loaiza');
+  await page.getByRole('button', { name: 'Save Account Information' }).click();
+  await page.getByText('Your account has been updated.').click();
+});
